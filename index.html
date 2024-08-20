@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="Google Sheet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
+  <title>Cambodia Securities PLC.</title>
+  <style>
+    body {
+      font-family: 'Noto Sans Khmer', sans-serif;
+    }
+    .logo {
+      max-width: 234px; /* Adjust the size if needed */
+      height: auto;
+      margin-top: 20%; /* Move the logo down by 20% */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <!-- Logo Section -->
+    <div class="text-center mb-4">
+      <img src="CSP_LOGO-02.png" alt="Logo" class="img-fluid logo" />
+    </div>
+
+    <!-- Date and Time Section -->
+    <div class="text-center mb-4">
+      <div id="dateTime">
+        <div id="clock" class="h5">Loading clock...</div>
+        <div id="date" class="h6">Loading date...</div>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <form
+      method="post"
+      action="https://script.google.com/macros/s/AKfycbzfYFJNjgQcOCDjIHe1hb1--nNAY8kEzPv4JwCsC1Aqdk2mAVIm0m35HU-yJQvQskl57Q/exec"
+      name="contact-form"
+      id="contactForm"
+    >
+      <div class="mb-3">
+        <label for="name" class="form-label">ឈ្មោះ​ / ​姓名/ NAME</label>
+        <input
+          type="text"
+          name="your-name"
+          class="form-control"
+          placeholder="ឈ្មោះ/Name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender/性别/ភេទ</label>
+        <select name="gender" id="gender" class="form-select" required>
+          <option value="" disabled selected>Select your gender</option>
+          <option value="male">Male/男性/បុរស</option>
+          <option value="female">Female/女性/ស្ត្រី</option>
+          <option value="other">Other/ផ្សេងទៀត</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="unit_number" class="form-label">បន្ទប់ / 戶型​ / UNIT</label>
+        <input
+          type="text"
+          name="unit_number"
+          class="form-control"
+          placeholder="Unit Number/លេខអង្គភាព"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">គ្រឿងបរិក្ខារ / 设施 /Facility</label>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            name="facility_type[]"
+            value="Pool"
+            id="pool"
+            class="form-check-input"
+          />
+          <label for="pool" class="form-check-label">អាងហែលទឹក/ 游泳池 / Swimming Pool</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            name="facility_type[]"
+            value="Gym"
+            id="gym"
+            class="form-check-input"
+          />
+          <label for="gym" class="form-check-label">កន្លែងហាត់ប្រាណ /健身房 / Gym</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            name="facility_type[]"
+            value="Steam & Sauna"
+            id="steam_sauna"
+            class="form-check-input"
+          />
+          <label for="steam_sauna" class="form-check-label">ស្ទីមសូណា/ 蒸汽桑拿 /Steam&Sauna</label>
+        </div>
+      </div>
+      <div class="text-center mb-5">
+        <input
+          type="submit"
+          value="Submit/បញ្ជូន"
+          id="submit"
+          class="btn btn-primary"
+        />
+      </div>
+
+      <div class="slider mt-5">
+        <div class="slides d-flex">
+          <div class="slide">
+            <img src="06.png" alt="Slide 1" class="img-fluid" />
+          </div>
+          <div class="slide">
+            <img src="07.png" alt="Slide 2" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <img
+      src="Infinity@4x-2.0s-200px-200px.gif"
+      alt="Loading"
+      class="loading-icon"
+      id="loadingIcon"
+    />
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Function to update the date and clock
+    function updateDateTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, "0");
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const seconds = now.getSeconds().toString().padStart(2, "0");
+      const day = now.getDate().toString().padStart(2, "0");
+      const month = (now.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+      const year = now.getFullYear();
+
+      document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById("date").textContent = `${day}/${month}/${year}`;
+    }
+
+    // Update the date and clock every second
+    setInterval(updateDateTime, 1000);
+    // Initial call to set the date and clock immediately
+    updateDateTime();
+
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Show the overlay and loading icon
+        document.getElementById("overlay").style.display = "flex"; // Changed to flex for centering
+        document.getElementById("loadingIcon").style.display = "block";
+        document.getElementById("contactForm").style.display = "none"; // Hide the form
+
+        var form = event.target;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Hide the overlay and loading icon
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("loadingIcon").style.display = "none";
+
+            if (data.result === "success") {
+              sendTelegramMessage(formData); // Send alert to Telegram
+              window.location.href = "thank-you.html"; // Redirect to thank you page
+            } else {
+              alert("There was a problem with your submission. Please try again.");
+            }
+          })
+          .catch((error) => {
+            // Hide the overlay and loading icon
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("loadingIcon").style.display = "none";
+
+            alert("There was a problem with your submission. Please try again.");
+            console.error("Error:", error);
+          });
+      });
+
+    function sendTelegramMessage(formData) {
+      const botToken = "7311469615:AAFDZHYwK9iMSBM0oESt-kxwcPKrjdsMaJQ"; // Your bot token
+      const chatId = "facility_38_Bot"; // Your channel's chat ID
+      const message = `New form submission:\n
+                        Name: ${formData.get("your-name")}\n
+                        Gender: ${formData.get("gender")}\n
+                        Unit Number: ${formData.get("unit_number")}\n
+                        Facility Types: ${formData.getAll("facility_type[]").join(", ")}\n
+                        Newsletter: ${formData.get("newsletter") ? "Subscribed" : "Not subscribed"}`;
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      console.log("Sending message to Telegram:", url); // Log the URL
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            console.log("Message sent to Telegram successfully.");
+          } else {
+            console.error("Failed to send message to Telegram:", data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error sending message to Telegram:", error);
+        });
+    }
+        // Function to handle the auto-slider
+    const slides = document.querySelector(".slides");
+    let index = 0;
+
+    function showNextSlide() {
+      index = (index + 1) % document.querySelectorAll(".slide").length;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    setInterval(showNextSlide, 3000); // Change slide every 3 seconds
+  </script>
+</body>
+</html>

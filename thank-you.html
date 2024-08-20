@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Google Sheet.css">
+    <title>Thank You</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f7f7;
+            font-family: 'Poppins', sans-serif;
+        }
+         .logo {
+            max-width: 234px; /* Adjust the size if needed */
+            height: auto;
+            margin-top: 20%; /* Move the logo down by 20% */
+        }
+        .container {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #1f417e;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: iconZoom 1s 0.5s forwards;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #1f417e;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: textPopIn 1.5s 1s forwards;
+        }
+        p {
+            font-size: 1.5rem;
+            color: #555;
+            opacity: 0;
+            animation: textFadeIn 1.5s 1.5s forwards;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #1f417e;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            opacity: 0;
+            animation: buttonBounce 1s 2s forwards;
+        }
+        .back-button:hover {
+            background-color: #162d5c;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes iconZoom {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes textPopIn {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        @keyframes textFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes buttonBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+     <div class="container mt-4">
+         <div class="text-center mb-4">
+            <img src="CSP_LOGO-02.png" alt="Logo" class="img-fluid logo">
+        </div>
+        <i class="fas fa-check-circle icon"></i>
+        <h1>Thank You!</h1>
+        <p>Your form has been successfully submitted.</p>
+        <!-- Back to Home Button -->
+        <a href="index.html" class="back-button">Back to Form</a>    
+     </div>         
+</body>
+</html>
